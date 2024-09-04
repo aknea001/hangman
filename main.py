@@ -1,5 +1,5 @@
 # add api to get random word later
-word = "testing"
+word = "hey"
 
 def main(word):
     letterAmounts = ""
@@ -16,6 +16,9 @@ def main(word):
     print(f"{letterAmounts} \n\nThere are {letterNum} letters in the word..")
     
     while True:
+        if "_" not in revealAnswer:
+            break
+
         while True:
             try:
                 guess = input("Guess a letter..\n>> ")
@@ -31,8 +34,11 @@ def main(word):
                 if letterList[i] == guess:
                     revealAnswer[i] = guess
         
-        print(letterList)
+        #print(letterList)
+
         print(" ".join(revealAnswer))
+
+    print("Good Job!")
 
 if __name__ == "__main__":
     main(word)
