@@ -15,6 +15,7 @@ def main(word):
         letterList.append(i)
         revealAnswer.append("_")
 
+    print(open(f"hangmanPics/hangman0.txt", "r").read())
     print(f"{letterAmounts} \n\nThere are {letterNum} letters in the word..")
     
     while True:
