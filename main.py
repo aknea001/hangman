@@ -46,10 +46,9 @@ def main(word):
         
         #print(letterList)
 
-        print(" ".join(revealAnswer))
+        print(f"{' '.join(revealAnswer)}\n\n")
 
     print("Good Job!")
 
 if __name__ == "__main__":
-    #main(word)
-    print("")
+    main(word)
