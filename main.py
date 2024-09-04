@@ -1,5 +1,15 @@
-# add api to get random word later
-word = "hey"
+import requests
+
+url = "https://random-word-api.herokuapp.com/word?lang=en"
+
+response = requests.get(url)
+
+if response.status_code == 200:
+
+    word = response.json()[0]
+else:
+    print(f"Failed to retrieve word: {response.status_code}")
+
 
 def main(word):
     letterAmounts = ""
@@ -41,4 +51,5 @@ def main(word):
     print("Good Job!")
 
 if __name__ == "__main__":
-    main(word)
+    #main(word)
+    print("")
