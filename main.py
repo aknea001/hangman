@@ -19,10 +19,13 @@ def main(word):
                 guess = input("Guess a letter..\n>> ")
                 if guess.isalpha() and len(guess) == 1:
                     break
+                else:
+                    print("Please guess only an alphabetical letter\n\n")
             except Exception as e:
                 print(f"ERROR getting letter: {e}")
-        print("hi")
-        break
+        
+        if guess in letterList:
+            print("You got a letter yay")
 
 if __name__ == "__main__":
     main(word)
