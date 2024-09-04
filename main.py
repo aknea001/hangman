@@ -5,11 +5,13 @@ def main(word):
     letterAmounts = ""
     letterNum = 0
     letterList = []
+    revealAnswer = []
 
     for i in word:
         letterAmounts += "_ "
         letterNum += 1
         letterList.append(i)
+        revealAnswer.append("_")
 
     print(f"{letterAmounts} \n\nThere are {letterNum} letters in the word..")
     
@@ -25,7 +27,12 @@ def main(word):
                 print(f"ERROR getting letter: {e}")
         
         if guess in letterList:
-            print("You got a letter yay")
+            for i in range(len(letterList)):
+                if letterList[i] == guess:
+                    revealAnswer[i] = guess
+        
+        print(letterList)
+        print(" ".join(revealAnswer))
 
 if __name__ == "__main__":
     main(word)
