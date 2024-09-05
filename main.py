@@ -20,6 +20,7 @@ lives = 6
 letterList = []
 revealAnswer = []
 guessing = False
+usedLetters = []
 
 
 def getGuess():
@@ -32,7 +33,11 @@ def getGuess():
             if guess[0] == "-":
                 commands(guess)
             elif guess.isalpha() and len(guess) == 1:
-                guessHandling(guess)
+                if guess in usedLetters:
+                    print("You've already tried this letter..")
+                else:
+                    usedLetters.append(guess)
+                    guessHandling(guess)
             else:
                 print("Please guess only an alphabetical letter\n\n")
         except Exception as e:
@@ -58,6 +63,8 @@ def guessHandling(guess):
 def endHandling():
     if "_" not in revealAnswer:
         print(open(f"hangmanPics/hangman0.txt", "r").read())
+
+        print(' '.join(letterList))
         print("Good Job! You did it!")
 
         exit()
@@ -71,7 +78,7 @@ def endHandling():
         return
     
 def commands(guess):
-    if guess == "-h" or guess == "--help":
+    if guess[:2] == "-h" or guess[:6] == "--help":
         print(open("help.txt", "r").read())
     elif guess[:2] == "-g" or guess[:7] == "--guess":
         guess = guess.split()
@@ -88,6 +95,8 @@ def commands(guess):
             print(open(f"hangmanPics/hangman{mistakes}.txt", "r").read())
             print(" ".join(revealAnswer))
             endHandling()
+    #elif guess[:2] == "-l" or guess[:9] == "--letters":
+
 
 def main(word):
     global letterAmounts
