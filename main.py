@@ -25,7 +25,7 @@ def main(word):
         letterList.append(i)
         revealAnswer.append("_")
 
-    print(open(f"hangmanPics/hangman0.txt", "r").read())
+    print(open("hangmanPics/hangman0.txt", "r").read())
     print(f"{letterAmounts} \n\nThere are {letterNum} letters in the word..")
     
     while True:
@@ -56,7 +56,9 @@ def main(word):
 
         if lives <= 0:
             print(open("hangmanPics/dead.txt", "r").read())
-            print("You died :(\n x_x")
+            print("You died :(\n x_x\n")
+            print(f"The word was: {' '.join(letterList)}")
+
             return
 
 if __name__ == "__main__":
