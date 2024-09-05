@@ -1,4 +1,5 @@
 import requests
+import string
 
 url = "https://random-word-api.herokuapp.com/word?lang=en"
 
@@ -21,6 +22,10 @@ letterList = []
 revealAnswer = []
 guessing = False
 usedLetters = []
+alphabet = []
+
+for i in string.ascii_lowercase:
+    alphabet.append(i)
 
 
 def getGuess():
@@ -36,6 +41,7 @@ def getGuess():
                 print("You've already tried this letter..")
             else:
                 usedLetters.append(guess)
+                alphabet.remove(guess)
                 guessHandling(guess)
         else:
             print("Please guess only an alphabetical letter\n\n")
@@ -105,6 +111,8 @@ def commands(guess):
         else:
             # print("no args")
             print(", ".join(sorted(usedLetters)))
+    elif guess[:2] == "!a" or guess[:11] == "!!avaliable":
+        print(", ".join(alphabet))
 
 
 def main(word):
