@@ -14,6 +14,8 @@ else:
 def main(word):
     letterAmounts = ""
     letterNum = 0
+    mistakes = 0
+    lives = 6
     letterList = []
     revealAnswer = []
 
@@ -23,6 +25,7 @@ def main(word):
         letterList.append(i)
         revealAnswer.append("_")
 
+    print(open(f"hangmanPics/hangman0.txt", "r").read())
     print(f"{letterAmounts} \n\nThere are {letterNum} letters in the word..")
     
     while True:
@@ -43,12 +46,18 @@ def main(word):
             for i in range(len(letterList)):
                 if letterList[i] == guess:
                     revealAnswer[i] = guess
-        
-        #print(letterList)
+        else:
+            mistakes += 1
+            lives -= 1
+            
+        # print(letterList)
+        print(open(f"hangmanPics/hangman{mistakes}.txt", "r").read())
+        print(" ".join(revealAnswer))
 
-        print(f"{' '.join(revealAnswer)}\n\n")
-
-    print("Good Job!")
+        if lives <= 0:
+            print(open("hangmanPics/dead.txt", "r").read())
+            print("You died :(\n x_x")
+            return
 
 if __name__ == "__main__":
     main(word)
