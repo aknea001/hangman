@@ -11,7 +11,7 @@ if response.status_code == 200:
 else:
     print(f"Failed to retrieve word: {response.status_code}")
 
-#word = "test"
+word = "test"
 
 letterAmounts = ""
 letterNum = 0
@@ -24,6 +24,7 @@ guessing = False
 
 def getGuess():
     global guessing
+    global mistakes
 
     while True:
         try:
@@ -32,11 +33,20 @@ def getGuess():
 
                 guess = input("Which word do u want to guess?\n>> ")
                 if guess == word:
-                    print("yay")
+                    print(open(f"hangmanPics/hangman0.txt", "r").read())
+                    print("Good Job! You did it!")
+
+                    exit()
+                else:
+                    mistakes += 1
+
+                    print(open(f"hangmanPics/hangman{mistakes}.txt", "r").read())
+                    print(" ".join(revealAnswer))
+                    endHandling()
             else:
                 guess = input("Guess a letter..\n>> ")
                 if guess[0] == "-":
-                    if guess == "-g":
+                    if guess == "-g" or guess == "--guess":
                         guessing = True
                 elif guess.isalpha() and len(guess) == 1:
                     guessHandling(guess)
