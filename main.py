@@ -28,20 +28,17 @@ def getGuess():
     global mistakes
 
     while True:
-        try:
-            guess = input("Guess a letter..\n>> ")
-            if guess[0] == "-":
-                commands(guess)
-            elif guess.isalpha() and len(guess) == 1:
-                if guess in usedLetters:
-                    print("You've already tried this letter..")
-                else:
-                    usedLetters.append(guess)
-                    guessHandling(guess)
+        guess = input("Guess a letter..\n>> ")
+        if guess[0] == "!":
+            commands(guess)
+        elif guess.isalpha() and len(guess) == 1:
+            if guess in usedLetters:
+                print("You've already tried this letter..")
             else:
-                print("Please guess only an alphabetical letter\n\n")
-        except Exception as e:
-            print(f"ERROR getting letter: {e}")
+                usedLetters.append(guess)
+                guessHandling(guess)
+        else:
+            print("Please guess only an alphabetical letter\n\n")
 
 def guessHandling(guess):
     global mistakes
@@ -98,11 +95,15 @@ def commands(guess):
     elif guess[:2] == "!l" or guess[:9] == "!!letters":
         guess = guess.split()
 
-        if guess[1] == "-t":
-            print(", ".join(usedLetters))
-        elif guess[1] == "-r":
-            print(", ".join(usedLetters.reverse()))
+        if len(guess) > 1:
+            if guess[1] == "-t" or False:
+                print(", ".join(usedLetters))
+            elif guess[1] == "-r" or False:
+                print(", ".join(usedLetters[::-1]))
+            else:
+                print(", ".join(sorted(usedLetters)))
         else:
+            # print("no args")
             print(", ".join(sorted(usedLetters)))
 
 
@@ -118,6 +119,8 @@ def main(word):
 
     print(open("hangmanPics/hangman0.txt", "r").read())
     print(f"{letterAmounts} \n\nThere are {letterNum} letters in the word..")
+
+    print("PS: you can use !h to see different commands")
 
     getGuess()
 

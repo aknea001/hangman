@@ -10,7 +10,7 @@
             Sorts the letters alphabetically
         -t
             TIME
-            
+
             Sorts the letters from oldest to newest guess
         -r
             REVERSE
