@@ -19,6 +19,8 @@ def main(word):
     letterList = []
     revealAnswer = []
 
+    guessing = False
+
     for i in word:
         letterAmounts += "_ "
         letterNum += 1
@@ -34,8 +36,16 @@ def main(word):
 
         while True:
             try:
+                if guessing:
+                    guess = input("Which word do u want to guess?\n>> ")
+                    if guess == "".join(letterList):
+                        print("yippie")
                 guess = input("Guess a letter..\n>> ")
-                if guess.isalpha() and len(guess) == 1:
+                if guess[0] == "-":
+                    if guess == "-g":
+                        guessing = True
+                        break
+                elif guess.isalpha() and len(guess) == 1:
                     break
                 else:
                     print("Please guess only an alphabetical letter\n\n")
@@ -48,13 +58,12 @@ def main(word):
                     revealAnswer[i] = guess
         else:
             mistakes += 1
-            lives -= 1
             
         # print(letterList)
         print(open(f"hangmanPics/hangman{mistakes}.txt", "r").read())
         print(" ".join(revealAnswer))
 
-        if lives <= 0:
+        if mistakes >= lives:
             print(open("hangmanPics/dead.txt", "r").read())
             print("You died :(\n x_x\n")
             print(f"The word was: {' '.join(letterList)}")
