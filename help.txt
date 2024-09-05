@@ -1,0 +1,8 @@
+-g --guess (syntax: -g GUESS):
+    Guess the whole word, guessing wrong will result in losing a life
+
+-l --letters (syntax: -l):
+    Prints the letters you've already guessed
+
+-a --avaliable (syntax: -l):
+    Prints all the avaliable letters
