@@ -28,30 +28,13 @@ def getGuess():
 
     while True:
         try:
-            if guessing:
-                guessing = False
-
-                guess = input("Which word do u want to guess?\n>> ")
-                if guess == word:
-                    print(open(f"hangmanPics/hangman0.txt", "r").read())
-                    print("Good Job! You did it!")
-
-                    exit()
-                else:
-                    mistakes += 1
-
-                    print(open(f"hangmanPics/hangman{mistakes}.txt", "r").read())
-                    print(" ".join(revealAnswer))
-                    endHandling()
+            guess = input("Guess a letter..\n>> ")
+            if guess[0] == "-":
+                commands(guess)
+            elif guess.isalpha() and len(guess) == 1:
+                guessHandling(guess)
             else:
-                guess = input("Guess a letter..\n>> ")
-                if guess[0] == "-":
-                    if guess == "-g" or guess == "--guess":
-                        guessing = True
-                elif guess.isalpha() and len(guess) == 1:
-                    guessHandling(guess)
-                else:
-                    print("Please guess only an alphabetical letter\n\n")
+                print("Please guess only an alphabetical letter\n\n")
         except Exception as e:
             print(f"ERROR getting letter: {e}")
 
@@ -86,6 +69,25 @@ def endHandling():
         exit()
     else:
         return
+    
+def commands(guess):
+    if guess == "-h" or guess == "--help":
+        print(open("help.txt", "r").read())
+    elif guess[:2] == "-g" or guess[:7] == "--guess":
+        guess = guess.split()
+        if len(guess) >= 3:
+            raise Exception(f"ERROR {guess[0]} only takes one argument..\nSyntax {guess[0]} your guess")
+        if guess[1] == word:
+            print(open(f"hangmanPics/hangman0.txt", "r").read())
+            print("Good Job! You did it!")
+
+            exit()
+        else:
+            mistakes += 1
+
+            print(open(f"hangmanPics/hangman{mistakes}.txt", "r").read())
+            print(" ".join(revealAnswer))
+            endHandling()
 
 def main(word):
     global letterAmounts
