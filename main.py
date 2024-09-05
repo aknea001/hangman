@@ -18,6 +18,26 @@ letterList = []
 revealAnswer = []
 guessing = False
 
+
+def getGuess():
+    while True:
+        try:
+            if guessing:
+                guess = input("Which word do u want to guess?\n>> ")
+                if guess == word:
+                    print("yippie")
+            guess = input("Guess a letter..\n>> ")
+            if guess[0] == "-":
+                if guess == "-g":
+                    guessing = True
+                    break
+            elif guess.isalpha() and len(guess) == 1:
+                break
+            else:
+                print("Please guess only an alphabetical letter\n\n")
+        except Exception as e:
+            print(f"ERROR getting letter: {e}")
+
 def guessHandling(guess):
     if guess in letterList:
         for i in range(len(letterList)):
@@ -48,25 +68,6 @@ def endHandling():
         return "dead"
     else:
         return
-
-def getGuess():
-    while True:
-        try:
-            if guessing:
-                guess = input("Which word do u want to guess?\n>> ")
-                if guess == "".join(letterList):
-                    print("yippie")
-            guess = input("Guess a letter..\n>> ")
-            if guess[0] == "-":
-                if guess == "-g":
-                    guessing = True
-                    break
-            elif guess.isalpha() and len(guess) == 1:
-                break
-            else:
-                print("Please guess only an alphabetical letter\n\n")
-        except Exception as e:
-            print(f"ERROR getting letter: {e}")
 
 def main(word):
     for i in word:
