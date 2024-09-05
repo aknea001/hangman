@@ -33,7 +33,7 @@ def getGuess():
     global mistakes
 
     while True:
-        guess = input("Guess a letter..\n>> ")
+        guess = input("Guess a letter..\n>> ").lower()
         if guess[0] == "!":
             commands(guess)
         elif guess.isalpha() and len(guess) == 1:
