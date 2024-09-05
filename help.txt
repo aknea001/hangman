@@ -1,8 +1,21 @@
--g --guess (syntax: -g GUESS):
+!g !!guess (syntax: !g GUESS):
     Guess the whole word, guessing wrong will result in losing a life
 
--l --letters (syntax: -l):
+!l !!letters (syntax: !l OPTION):
     Prints the letters you've already guessed
 
--a --avaliable (syntax: -l):
+    OPTION
+        -a (default)
+            ALPHABETICALLY
+            Sorts the letters alphabetically
+        -t
+            TIME
+            
+            Sorts the letters from oldest to newest guess
+        -r
+            REVERSE
+
+            Sorts the letters from newest to oldest guess
+
+!a !!avaliable (syntax: !a):
     Prints all the avaliable letters

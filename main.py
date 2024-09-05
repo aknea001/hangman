@@ -78,9 +78,9 @@ def endHandling():
         return
     
 def commands(guess):
-    if guess[:2] == "-h" or guess[:6] == "--help":
+    if guess[:2] == "!h" or guess[:6] == "!!help":
         print(open("help.txt", "r").read())
-    elif guess[:2] == "-g" or guess[:7] == "--guess":
+    elif guess[:2] == "!g" or guess[:7] == "!!guess":
         guess = guess.split()
         if len(guess) >= 3:
             raise Exception(f"ERROR {guess[0]} only takes one argument..\nSyntax {guess[0]} your guess")
@@ -95,7 +95,15 @@ def commands(guess):
             print(open(f"hangmanPics/hangman{mistakes}.txt", "r").read())
             print(" ".join(revealAnswer))
             endHandling()
-    #elif guess[:2] == "-l" or guess[:9] == "--letters":
+    elif guess[:2] == "!l" or guess[:9] == "!!letters":
+        guess = guess.split()
+
+        if guess[1] == "-t":
+            print(", ".join(usedLetters))
+        elif guess[1] == "-r":
+            print(", ".join(usedLetters.reverse()))
+        else:
+            print(", ".join(sorted(usedLetters)))
 
 
 def main(word):
