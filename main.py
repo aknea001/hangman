@@ -21,7 +21,6 @@ mistakes = 0
 lives = 6
 letterList = []
 revealAnswer = []
-guessing = False
 usedLetters = []
 alphabet = []
 vowels = ["a", "e", "i", "o", "u", "y"]
@@ -32,7 +31,6 @@ for i in string.ascii_lowercase:
     alphabet.append(i)
 
 def getGuess():
-    global guessing
     global mistakes
 
     while True:
