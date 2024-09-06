@@ -24,10 +24,18 @@ revealAnswer = []
 guessing = False
 usedLetters = []
 alphabet = []
+vowels = ["a", "e", "i", "o", "u", "y"]
+consonants = []
 
 for i in string.ascii_lowercase:
     alphabet.append(i)
 
+for el in alphabet:
+    if el not in vowels:
+        consonants.append(el)
+        # print(f"constonants: {consonants}")
+        # print(f"vowels: {vowels}")
+        # print(f"alphabet: {alphabet}")
 
 def getGuess():
     global guessing
@@ -83,6 +91,7 @@ def endHandling():
     
 def commands(guess):
     global mistakes
+    global vowels
 
     if guess[:2] == "!h" or guess[:6] == "!!help":
         print(open("help.txt", "r").read())
@@ -115,7 +124,20 @@ def commands(guess):
             # print("no args")
             print(", ".join(sorted(usedLetters)))
     elif guess[:2] == "!a" or guess[:11] == "!!avaliable":
-        print(", ".join(alphabet))
+        guess = guess.split()
+        if len(guess) > 1:
+            for i in vowels:
+                if i not in alphabet:
+                    vowels.remove(i)
+            
+            for i in alphabet:
+                if i not in vowels:
+                    consonants.append(i)
+            
+            vowels = vowels[:len(vowels)//2]
+            print(f"Vowels:\n{', '.join(vowels)}\n\nConsonants:\n{', '.join(consonants)}")
+        else:
+            print(", ".join(alphabet))
 
 
 def main(word):
