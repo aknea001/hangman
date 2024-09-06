@@ -25,17 +25,11 @@ guessing = False
 usedLetters = []
 alphabet = []
 vowels = ["a", "e", "i", "o", "u", "y"]
+avliableVowels = ["a", "e", "i", "o", "u", "y"]
 consonants = []
 
 for i in string.ascii_lowercase:
     alphabet.append(i)
-
-for el in alphabet:
-    if el not in vowels:
-        consonants.append(el)
-        # print(f"constonants: {consonants}")
-        # print(f"vowels: {vowels}")
-        # print(f"alphabet: {alphabet}")
 
 def getGuess():
     global guessing
@@ -49,14 +43,15 @@ def getGuess():
             if guess in usedLetters:
                 print("You've already tried this letter..")
             else:
-                usedLetters.append(guess)
-                alphabet.remove(guess)
                 guessHandling(guess)
         else:
             print("Please guess only an alphabetical letter\n\n")
 
 def guessHandling(guess):
     global mistakes
+
+    usedLetters.append(guess)
+    alphabet.remove(guess)
 
     if guess in letterList:
         for i in range(len(letterList)):
@@ -92,6 +87,7 @@ def endHandling():
 def commands(guess):
     global mistakes
     global vowels
+    global consonants
 
     if guess[:2] == "!h" or guess[:6] == "!!help":
         print(open("help.txt", "r").read())
@@ -127,15 +123,16 @@ def commands(guess):
         guess = guess.split()
         if len(guess) > 1:
             for i in vowels:
-                if i not in alphabet:
-                    vowels.remove(i)
+                if i not in alphabet and i in avliableVowels:
+                    avliableVowels.remove(i)
+                    print(f"removing {i}")
             
             for i in alphabet:
                 if i not in vowels:
                     consonants.append(i)
             
-            vowels = vowels[:len(vowels)//2]
-            print(f"Vowels:\n{', '.join(vowels)}\n\nConsonants:\n{', '.join(consonants)}")
+            print(f"Vowels:\n{', '.join(avliableVowels)}\n\nConsonants:\n{', '.join(consonants)}")
+            consonants = []
         else:
             print(", ".join(alphabet))
 
