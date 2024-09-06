@@ -1,5 +1,6 @@
 import requests
 import string
+import re
 
 url = "https://random-word-api.herokuapp.com/word?lang=en"
 
@@ -12,7 +13,7 @@ if response.status_code == 200:
 else:
     print(f"Failed to retrieve word: {response.status_code}")
 
-word = "test"
+#word = "test"
 
 letterAmounts = ""
 letterNum = 0
@@ -36,7 +37,7 @@ def getGuess():
         guess = input("Guess a letter..\n>> ").lower()
         if guess[0] == "!":
             commands(guess)
-        elif guess.isalpha() and len(guess) == 1:
+        elif bool(re.match("^[A-Za-z]+$", guess)) and len(guess) == 1:
             if guess in usedLetters:
                 print("You've already tried this letter..")
             else:
@@ -81,13 +82,15 @@ def endHandling():
         return
     
 def commands(guess):
+    global mistakes
+
     if guess[:2] == "!h" or guess[:6] == "!!help":
         print(open("help.txt", "r").read())
     elif guess[:2] == "!g" or guess[:7] == "!!guess":
         guess = guess.split()
-        if len(guess) >= 3:
-            raise Exception(f"ERROR {guess[0]} only takes one argument..\nSyntax {guess[0]} your guess")
-        if guess[1] == word:
+        if len(guess) < 2:
+            print(f"ERROR {guess[0]} only takes one argument..\nSyntax {guess[0]} your guess")
+        elif guess[1] == word:
             print(open(f"hangmanPics/hangman0.txt", "r").read())
             print("Good Job! You did it!")
 
