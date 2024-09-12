@@ -33,6 +33,11 @@ avliableVowels = ["a", "e", "i", "o", "u", "y"]
 for i in string.ascii_lowercase:
     alphabet.append(i)
 
+def hangmanPic(mistakes):
+    picFile = open(f"hangmanPics/hangman{mistakes or 0}.txt", "r")
+    print(picFile.read())
+    picFile.close()
+
 def getGuess():
     global mistakes
 
@@ -65,12 +70,12 @@ def guessHandling(guess):
     
     # print(letterList)
 
-    print(open(f"hangmanPics/hangman{mistakes}.txt", "r").read())
+    hangmanPic(mistakes)
     print(" ".join(revealAnswer))
 
 def endHandling():
     if "_" not in revealAnswer:
-        print(open(f"hangmanPics/hangman0.txt", "r").read())
+        hangmanPic()
 
         print(' '.join(letterList))
         print("Good Job! You did it!")
@@ -97,14 +102,14 @@ def commands(guess):
         if len(guess) < 2:
             print(f"ERROR {guess[0]} only takes one argument..\nSyntax {guess[0]} your guess")
         elif guess[1] == word:
-            print(open(f"hangmanPics/hangman0.txt", "r").read())
+            hangmanPic()
             print("Good Job! You did it!")
 
             exit()
         else:
             mistakes += 1
 
-            print(open(f"hangmanPics/hangman{mistakes}.txt", "r").read())
+            hangmanPic(mistakes)
             print(" ".join(revealAnswer))
             endHandling()
     elif guess[:2] == "!l" or guess[:9] == "!!letters":
@@ -148,7 +153,7 @@ def main(word):
         letterList.append(i)
         revealAnswer.append("_")
 
-    print(open("hangmanPics/hangman0.txt", "r").read())
+    hangmanPic()
     print(f"{letterAmounts} \n\nThere are {letterNum} letters in the word..")
 
     print("PS: you can use !h to see different commands")
