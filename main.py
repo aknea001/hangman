@@ -17,15 +17,18 @@ else:
 
 letterAmounts = ""
 letterNum = 0
+
 mistakes = 0
 lives = 6
+
 letterList = []
 revealAnswer = []
 usedLetters = []
+
 alphabet = []
+consonants = []
 vowels = ["a", "e", "i", "o", "u", "y"]
 avliableVowels = ["a", "e", "i", "o", "u", "y"]
-consonants = []
 
 for i in string.ascii_lowercase:
     alphabet.append(i)
