@@ -33,8 +33,8 @@ avliableVowels = ["a", "e", "i", "o", "u", "y"]
 for i in string.ascii_lowercase:
     alphabet.append(i)
 
-def hangmanPic(mistakes):
-    picFile = open(f"hangmanPics/hangman{mistakes or 0}.txt", "r")
+def hangmanPic(mistakes=0):
+    picFile = open(f"hangmanPics/hangman{mistakes}.txt", "r")
     print(picFile.read())
     picFile.close()
 
