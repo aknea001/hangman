@@ -12,6 +12,7 @@ if response.status_code == 200:
     
 else:
     print(f"Failed to retrieve word: {response.status_code}")
+    exit()
 
 #word = "test"
 
